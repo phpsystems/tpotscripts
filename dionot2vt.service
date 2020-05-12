@@ -1,0 +1,13 @@
+[Unit]
+Description=Dionaea Inotify to Virustotal Service
+After=multi-user.target
+
+[Service]
+# Command to execute when the service is started
+ExecStart=/usr/bin/python /opt/scripts/inot2vt.py /data/dionaea/binaries/
+RestartSec=5
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
