@@ -11,8 +11,6 @@ from elasticsearch import Elasticsearch
 API_KEY = '<Your VT API KEY Here>'
 
 def setup():
-#	res = requests.get('http://localhost:9200')
-#	print (res.content)
 	elast = Elasticsearch(
 		['localhost'],
 		http_auth=('<Elastic Username>', '<Elastic Password>'),
@@ -43,10 +41,7 @@ def _main():
 	for event in i.event_gen(yield_nones=False):
 		(_, type_names, path, filename) = event
 
-#		print("PATH=[{}] FILENAME=[{}] EVENT_TYPES={}".format(path, filename, type_names))
-#		PATH=[/data/dionaea/binaries/] FILENAME=[1f2029ef2b98e1bbe930d638691af9cd] EVENT_TYPES=['IN_CLOSE_WRITE']
 		if format(type_names) == "['IN_CLOSE_WRITE']":
-#			print "Filename: " + format(filename)
 			filen, file_ext = os.path.splitext(format(filename))
 			response = scan(filen)
 			elasticimport(elast, filen ,response)
